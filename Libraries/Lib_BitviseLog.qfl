@@ -23,7 +23,9 @@
 			Dialog("Bitvise SSH Client 8.46").WinEdit("Username").Set dtUsername
 			Dialog("Bitvise SSH Client 8.46").WinButton("Log in").Click
 			wait 2
-			Dialog("Host Key Verification").WinButton("Accept for This Session").Click
+			If Dialog("Host Key Verification").WinButton("Accept for This Session").Exist(2) Then
+				Dialog("Host Key Verification").WinButton("Accept for This Session").Click
+			End If
 			wait 1
 			Dialog("User Authentication").WinEdit("Password").Set dtPassword
 			Dialog("User Authentication").WinButton("OK").Click
