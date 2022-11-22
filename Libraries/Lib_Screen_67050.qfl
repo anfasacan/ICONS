@@ -1,0 +1,455 @@
+﻿Sub Search_Detail_CIF_67050
+	dtTime = 1
+	set objkey = CreateObject("WScript.Shell")
+	dtCIF = DataTable.Value("CIF",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("MainScreen").WebList("Dropdown Detail").Click
+	wait 2
+	If  DataTable.Value("KODE_DETAIL",dtlocalsheet) <> "" Then
+		objkey.SendKeys DataTable.Value("KODE_DETAIL",dtlocalsheet)
+	End If
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("MainScreen").WebEdit("Field CIF").Click
+	wait 1
+	objkey.SendKeys (dtCIF)
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050"), "Fill Field CIF", " ", compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("MainScreen").WebEdit("Field CIF").Click
+	objkey.SendKeys "{ENTER}"
+	wait 20
+
+	Call Check_Form_Child_Screen_67050()
+	
+End Sub
+
+Sub Change_Field_67000
+	set objkey = CreateObject("WScript.Shell")
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("MainScreen").WebEdit("Field Jalan dan Nomer").Set DataTable.Value("ALAMAT_PERUM",dtlocalsheet)
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("MainScreen").WebEdit("Field Kota Penerbit ID").Set DataTable.Value("KOTA_PENERBIT_ID",dtlocalsheet)
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("MainScreen").WebList("Dropdown Status").Click
+	wait 1
+	objkey.SendKeys DataTable.Value("KODE_STATUS",dtlocalsheet)
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+	information = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("Statusbar").WebElement("statusText").GetROProperty("innertext")
+	informationIcon = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("Statusbar").Image("greenlight").GetROProperty("file name")
+	If informationIcon = "greenlight.jpg" Then
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "Success To Change Data", "With Status " & information & " And Dialog Box " & DialogText, compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	Else 
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "Failed To Change Data", "With Status " & information & " And Dialog Box " & DialogText, compatibilityMode.Desktop, ReportStatus.Failed)	
+		wait 2
+	End If
+End Sub
+
+
+Sub Change_Field_67010
+	set objkey = CreateObject("WScript.Shell")
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebEdit("Field Jalan dan Nomer").Set DataTable.Value("ALAMAT_PERUM",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebEdit("Field Desa Kelurahan").Set DataTable.Value("DESA_KELURAHAN",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebList("Dropdown Kecamatan").Click
+	objkey.SendKeys DataTable.Value("KECAMATAN",dtlocalsheet)
+	wait 5
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebList("Dropdown Kode Pos").Click
+	wait 5
+	For Iterator = 0 To DataTable.Value("KODE_POS",dtlocalsheet) + 2 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 2
+	objkey.SendKeys "{TAB}"
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebEdit("Field No Telp Rumah").Set DataTable.Value("NO_TELP_RUMAH",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebEdit("Field Berlaku Sejak").Set DataTable.Value("BERLAKU_SEJAK",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebEdit("Field Tanggal Jatuh Tempo").Set DataTable.Value("TANGGAL_JATUH_TEMPO",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebList("Dropdown Kode Lokasi").Click
+	objkey.SendKeys DataTable.Value("KODE_LOKASI",dtlocalsheet)
+
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+
+End Sub
+
+Sub Change_Field_67101
+	set objkey = CreateObject("WScript.Shell")
+	If DataTable.value("KODE_DETAIL",dtlocalsheet) = 5 Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Pemberi Kerja").Set DataTable.Value("PEMBERI_KERJA",dtlocalsheet)
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Keterangan Pekerjaan").Set DataTable.Value("KETERANGAN_KERJA",dtlocalsheet)
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Alamat Kerja 1").Set DataTable.Value("ALAMAT_KERJA_1",dtlocalsheet)
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Alamat Kerja 2").Set DataTable.Value("ALAMAT_KERJA_2",dtlocalsheet)
+	ElseIf DataTable.value("KODE_DETAIL",dtlocalsheet) = 8 Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Nilai Rumah").Set DataTable.value("NILAI_RUMAH",dtlocalsheet)
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Simpanan Lain").Set DataTable.value("SIMPANAN_LAIN",dtlocalsheet)	
+	End If
+	
+	
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+End Sub
+
+Sub Change_Field_67102
+	set objkey = CreateObject("WScript.Shell")
+	
+	If DataTable.value("KODE_DETAIL",dtlocalsheet) = 6 Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field No TDP").Set DataTable.Value("NO_TDP",dtlocalsheet)
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field No SIUP").Set DataTable.Value("NO_SIUP",dtlocalsheet)
+	ElseIf DataTable.value("KODE_DETAIL",dtlocalsheet) = 8 Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field Modal Bersih").Set DataTable.Value("MODAL_BERSIH",dtlocalsheet)
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field Ekuitas Pemengang Saham").Set DataTable.Value("EKUITAS_PEMEGANG_SAHAM",dtlocalsheet)
+	End If
+	
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+End Sub
+
+Sub Change_Field_67103
+	set objkey = CreateObject("WScript.Shell")
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103").Frame("MainScreen").WebList("Dropdown Referensi").Click
+	wait 2
+	objkey.SendKeys DataTable.Value("KODE_INDIKATOR_PEMASARAN",dtlocalsheet)
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103").Frame("MainScreen").WebEdit("Field Tanggal Jatuh Tempo").Set DataTable.Value("TANGGAL_JATUH_TEMPO",dtlocalsheet)
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+End Sub
+
+Sub Change_Field_67108
+	set objkey = CreateObject("WScript.Shell")
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108").Frame("MainScreen").WebEdit("Field Nama Ibu Kandung").Set DataTable.Value("NAMA_IBU_KANDUNG",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108").Frame("MainScreen").WebEdit("Field Email").Set DataTable.Value("EMAIL",dtlocalsheet)
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+End Sub
+
+Sub Change_Field_67109
+	set objkey = CreateObject("WScript.Shell")
+	If Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field No ID").GetROProperty("value") = "" Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebList("Dropdown Fungsi").Click
+		wait 2
+		objkey.SendKeys "c"
+	Else 
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebList("Dropdown Fungsi").Click
+		wait 2
+		objkey.SendKeys "a"
+	End If
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebList("Dropdown Jenis ID").Click
+	wait 2
+	objkey.SendKeys (DataTable.Value("KODE_JENIS_ID",dtlocalsheet))
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field No ID").Click
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field No ID").Set DataTable.Value("NO_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field Tempat Penerbit ID").Set DataTable.Value("TEMPAT_TERBIT_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field Tanggal").Set DataTable.Value("TANGGAL",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field Tanggal Expired").Set DataTable.Value("TANGGAL_EXPIRED",dtlocalsheet)
+
+	
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+End Sub
+
+Sub Change_Field_67060
+	set objkey = CreateObject("WScript.Shell")
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebList("Dropdown Other Bank Worst Collectibility").Click
+	objkey.SendKeys "{BACKSPACE}"
+	wait 1
+	objkey.SendKeys "{BACKSPACE}"
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebEdit("Field Other Bank").Click
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebList("Dropdown Other Bank Worst Collectibility").Click
+	wait 2
+	For Iterator = 1 To DataTable.Value("KODE_OTHER_BANK_WORST_COLLECTIBILITY",dtlocalsheet) + 1 Step 1
+		objkey.SendKeys "{DOWN}"
+		wait 1
+	Next
+	wait 2
+	objkey.SendKeys "{ENTER}"
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebEdit("Field Other Bank").Set DataTable.Value("OTHER_BANK_NAME",dtlocalsheet)
+
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebButton("Button Transmit").Click
+
+	wait 15
+End Sub
+
+
+Sub Change_Field_67111
+	set objkey = CreateObject("WScript.Shell")
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Nama Pemilik").Set DataTable.Value("NAMA_PEMILIK",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Alamat").Set DataTable.Value("ALAMAT",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field TIN").Set DataTable.Value("TIN",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Saham").Set DataTable.Value("PERSENAN_SAHAM",dtlocalsheet) 
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Pilih").Set DataTable.Value("KODE_PILIH",dtlocalsheet)
+
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebButton("Button Proses").Click
+
+	wait 15
+End Sub
+
+Sub Change_Field_67112
+	set objkey = CreateObject("WScript.Shell")
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field Nama Lengkap").Set DataTable.Value("NAMA_LENGKAP",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field Jabatan").Set DataTable.Value("JABATAN",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field No ID").Set DataTable.Value("NOMER_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field Pilih").Set DataTable.Value("KODE_PILIH",dtlocalsheet)
+
+
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebButton("Button Proses").Click
+
+	wait 15
+End Sub
+
+Sub Change_Field_67113
+	set objkey = CreateObject("WScript.Shell")
+	If Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nama Lengkap").GetROProperty("value") = "" Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Action").Click
+		wait 1
+		objkey.SendKeys "{BACKSPACE 3}"
+		wait 2
+		objkey.SendKeys "3"
+	Else 
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Action").Click
+		wait 1
+		objkey.SendKeys "{BACKSPACE 3}"
+		wait 2
+		objkey.SendKeys (DataTable.Value("KODE_ACTION",dtlocalsheet))
+	End If
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Hubungan Usaha").Click
+	wait 1
+	objkey.SendKeys "{BACKSPACE 3}"
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Hubungan Usaha").Click
+	For Iterator = 1 To DataTable.Value("KODE_TUJUAN",dtlocalsheet) + 1 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 1
+	objkey.SendKeys "{ENTER}"
+	wait 1
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Jenis ID").Click
+	wait 1
+	objkey.SendKeys "{BACKSPACE 3}"
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Jenis ID").Click
+	For Iterator = 1 To DataTable.Value("KODE_JENIS_ID",dtlocalsheet) + 1 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 1
+	objkey.SendKeys "{ENTER}"
+	wait 1
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Jenis Kelamin").Click
+	wait 1
+	objkey.SendKeys "{BACKSPACE 3}"
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Jenis Kelamin").Click
+	For Iterator = 1 To DataTable.Value("KODE_JENIS_KELAMIN",dtlocalsheet) + 1 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 1
+	objkey.SendKeys "{ENTER}"
+	wait 1
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Penghasilan Pertahun").Click
+	wait 1
+	objkey.SendKeys "{BACKSPACE 3}"
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Penghasilan Pertahun").Click
+	For Iterator = 1 To DataTable.Value("KODE_PENGHASILAN_PERTAHUN",dtlocalsheet) + 1 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 1
+	objkey.SendKeys "{ENTER}"
+	wait 1
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Status Kawin").Click
+	wait 1
+	objkey.SendKeys "{BACKSPACE 3}"
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Status Kawin").Click
+	For Iterator = 1 To DataTable.Value("KODE_STATUS_KAWIN",dtlocalsheet) + 1 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 1
+	objkey.SendKeys "{ENTER}"
+	wait 1
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Sumber Dana").Click
+	wait 1
+	objkey.SendKeys "{BACKSPACE 3}"
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Sumber Dana").Click
+	For Iterator = 1 To DataTable.Value("KODE_SUMBER_DANA",dtlocalsheet) + 1 Step 1
+		wait 1
+		objkey.SendKeys "{DOWN}"
+	Next
+	wait 1
+	objkey.SendKeys "{ENTER}"
+	wait 1
+
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nama Lengkap").Set DataTable.Value("NAMA_LENGKAP",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Alamat Bekerja").Set DataTable.Value("ALAMAT_TEMPAT_BEKERJA",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Alamat Sesuai ID").Set DataTable.Value("ALAMAT_SESUAI_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Alamat Tempat Tinggal").Set DataTable.Value("ALAMAT_TEMPAT_TINGGAL",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Kode No Telp Kantor").Set left(DataTable.Value("NO_TELP_TEMPAT_KERJA",dtlocalsheet),3)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field No Telp Kantor").Set mid(DataTable.Value("NO_TELP_TEMPAT_KERJA",dtlocalsheet),4,len(DataTable.Value("NO_TELP_TEMPAT_KERJA",dtlocalsheet)) - 3)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nomer ID").Set DataTable.Value("NO_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nomer Pajak").Set DataTable.Value("NO_PAJAK",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Pekerjaan").Set DataTable.Value("PEKERJAAN",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Tanggal Lahir").Set DataTable.Value("TANGGAL_LAHIR",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Tempat Lahir").Set DataTable.Value("TEMPAT_LAHIR",dtlocalsheet)
+
+
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebButton("Button Proses").Click
+
+	wait 15
+End Sub
+
+Sub Check_Form_Child_Screen_67050
+	Select Case DataTable.Value("KODE_DETAIL",dtlocalsheet)
+		Case 1
+			If Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("MainScreen").WebEdit("Field CIF").GetROProperty("value") <> "" Then
+				wait 2
+				Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "There is CIF Detail", "CIF Number : " & dtCIF, compatibilityMode.Desktop, ReportStatus.Passed)	
+				wait 2
+			else
+				wait 2
+				Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "Failed Searcing Detail CIF", "Failed To Generate Data From CIF " & dtCIF, "", compatibilityMode.Desktop, ReportStatus.Failed)	
+				wait 2
+			End If
+		Case 2
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010"), "Enter To Address Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 4
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100"), "Enter To Identifiaction Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 5
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "Enter To Personal Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 6
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "Enter To Business Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 7
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103"), "Enter To Marketing Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 8
+			wait 2
+			If Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Exist(2) Then
+				Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "Enter To Financial Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			ElseIf Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Exist(2) Then
+				Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "Enter To Financial Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			End If
+		Case 9
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108"), "Enter To Financial Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 11
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109"), "Enter To Legal Document Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 12
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060"), "Enter To Worst Collectibility Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 13
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111"), "Enter To FATCA Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 14
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112"), "Enter To administator Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Case 15
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113"), "Enter To UBO corporate Detail"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+	End Select
+End Sub
+
+Sub Check_Status_Notif
+	If Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("Statusbar").Image("greenlight").GetROProperty("file name") = "stopani.gif" Then
+		TextError = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("Statusbar").GetROProperty("innertext")
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("Statusbar"), "There Some Error","Error Detail : " & TextError,compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	ElseIf Dialog("Message from webpage 67050").Exist(2) Then
+		TextError = Dialog("Message from webpage 67050").Static("Isi Text Dialog").GetROProperty("text")
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050"), "There Some Error","Error Detail : " & TextError,compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+		Dialog("Message from webpage 67050").WinButton("Btn OK").Click
+	ElseIf Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("Statusbar").Image("greenlight").GetROProperty("file name") = "greenlight.jpg" Then
+		TextSuccess = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("Statusbar").GetROProperty("innertext")
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67050").Frame("Statusbar"), "Operation Success","Detail : " & TextSuccess ,compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	
+	End If 
+End Sub

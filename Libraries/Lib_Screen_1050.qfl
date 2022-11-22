@@ -1,0 +1,40 @@
+﻿
+Sub Filling_Mandatory_Field_1050
+Dim dtNorek,dtAmount,Information
+Set objkey = CreateObject("WScript.Shell")
+	dtNorek = DataTable.Value("NOMER_REKENING",dtlocalsheet)
+	dtAmount = DataTable.Value("AMOUNT",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("MainScreen").WebEdit("Field Nomer Rekening").Set dtNorek
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("MainScreen").WebEdit("Field Amount").Click
+	wait 1
+	objkey.SendKeys (dtAmount)
+	wait 1
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("MainScreen").WebButton("Btn Proses").Click
+	
+	If Window("Microsoft​ Edge").Window("Dibutuhkan Otorisasi Penyelia").Exist(3) Then
+		Window("Microsoft​ Edge").Window("Dibutuhkan Otorisasi Penyelia").Close
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("MainScreen").WebEdit("Field Amount").Set ""
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("MainScreen").WebEdit("Field Amount").Click
+		wait 1
+		objkey.SendKeys (dtAmount)
+		objkey.SendKeys ("0")
+		wait 1
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("MainScreen").WebButton("Btn Proses").Click
+	End If	
+	
+
+	If Dialog("Message from webpage").Static("DialogComponent.processDocumen").Exist(3) Then
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050"), "Access Denied", "", compatibilityMode.Desktop, ReportStatus.Failed)
+		Dialog("Message from webpage").Static("DialogComponent.processDocumen").Click
+		objkey.SendKeys "{ENTER}"
+	else
+		If Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("Statusbar").WebElement("KV_icons_Transaction_Timeout_error").Exist(1) or Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("Statusbar").WebElement("SF_icons_ApplicationNotActive").Exist(1) or Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("Statusbar").WebElement("SF_icons_NoMessageToDisplay").Exist(1) Then
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050"), "Fill All Mandatory Field and Click Proses", "Failed", compatibilityMode.Desktop, ReportStatus.Failed)
+		else
+			Information = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050").Frame("Statusbar").WebElement("statusText").GetROProperty("title")
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 1050"), "Fill All Mandatory Field and Click Proses", "The Status is " & Information, compatibilityMode.Desktop, ReportStatus.Passed)
+		End If	
+	End If
+	
+end sub

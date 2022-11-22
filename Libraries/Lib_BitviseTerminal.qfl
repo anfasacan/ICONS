@@ -1,0 +1,102 @@
+﻿Dim JLN_Number
+
+Sub RUN_Command_Bitvise(Command)
+	wait 10
+	Dim dtCommand
+	
+	If ucase(command) = "RESET_TELLER" Then
+		dtCommand	= "reset_teller"
+	else
+		dtCommand	= DataTable.Value("COMMAND_" & Command, dtlocalsheet)	
+	End If
+	
+	Set objkey = CreateObject("WScript.Shell")
+	Set devices = CreateObject("Mercury.DeviceReplay")
+	
+	Window("Bitvise xterm").Type dtCommand
+	
+	If ucase(command) = "GETGLIF" Then
+		objkey.SendKeys (" ")
+		wait 1
+		objkey.SendKeys (JLN_Number)
+	ElseIf ucase(command) = "RESET_TELLER" Then
+		Dim dtNoTeller,dtPasswordTeller
+		dtNoTeller			= DataTable.Value("ICONS_NO_TELLER", "ICONS")
+		dtPasswordTeller	= DataTable.Value("ICONS_PASSWORD", "ICONS")
+		objkey.SendKeys "{ENTER}"
+		wait 1
+		objkey.SendKeys (dtNoTeller)
+		wait 1
+		objkey.SendKeys "{ENTER}"
+		wait 1
+		objkey.SendKeys (dtPasswordTeller)
+		wait 1
+		objkey.SendKeys "{ENTER}"
+		wait 1
+		objkey.SendKeys ("Y")
+	End If
+	
+	Window("Bitvise xterm").Type micReturn
+	
+	wait 15
+	
+	If Window("Bitvise xterm_2").InsightObject("FAIL !").Exist(3) and ucase(command) = "SIMATM" Then
+		Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand),"The Output of SIMATM FAIL!", compatibilityMode.Desktop, ReportStatus.Failed)	
+	else
+		Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand)," ", compatibilityMode.Desktop, ReportStatus.Passed)	
+	End If
+	
+	
+	wait 2
+end sub
+
+Sub Close_Terminal_Bitvise()
+	Window("Bitvise xterm").Close
+End Sub
+
+Sub Open_Terminal_Bitvise()	
+	If Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Exist(3) Then
+		Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Click
+	ElseIf Dialog("fnstpca@192.168.132.31:22").InsightObject("TERMINAL_IMG").Exist(3) Then
+		Dialog("fnstpca@192.168.132.31:22").InsightObject("TERMINAL_IMG").Exist(3)
+	else
+		Dialog("Administrator@192.168.150.133:22").WinObject("Custom1").Click 30,218
+	End If
+
+	do 
+	Loop until Window("Bitvise xterm").Exist(2) 
+	
+	Window("Bitvise xterm").Maximize
+	wait 3
+End Sub
+
+Sub GET_JLN_Number
+	REM ==== Call Funtion Library
+	Dim objSysInfo, Path_Env, LibFunction
+	Set objSysInfo 		= Createobject("Wscript.Network")	
+	Path_Env = Environment.Value("Path_Folder")
+	LibFunction = Path_Env & "Libraries\"
+	LibRepo = Path_Env & "Repositories\"
+	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
+	
+	Set objkey = CreateObject("WScript.Shell")
+	Set PasteData = CreateObject("Mercury.Clipboard")
+	Set devices = CreateObject("Mercury.DeviceReplay")
+	
+	If Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").Exist(5) Then
+		x = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_x") + 90)
+		y = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_y") + 10)
+		devices.MouseMove x , y
+		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
+		wait 2
+		JLN_Number = PasteData.GetText
+		wait 2
+	End If
+End Sub
+
+Sub RUN_SQLPLUS_Bitvice
+	wait 3
+	Window("Bitvise xterm").Type "sqlplus /"
+	wait 2
+	Window("Bitvise xterm").Type micReturn
+end sub
