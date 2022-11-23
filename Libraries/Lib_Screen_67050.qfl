@@ -107,6 +107,24 @@ Sub Change_Field_67101
 	wait 15
 End Sub
 
+Sub Change_Field_67100
+	set objkey = CreateObject("WScript.Shell")
+	
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100").Frame("MainScreen").WebEdit("Field Kota Terbit ID").Set DataTable.value("KOTA_TERBIT_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100").Frame("MainScreen").WebEdit("Field Tanggal Terbit ID").Set DataTable.value("TANGGAL_TERBIT_ID",dtlocalsheet)
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100").Frame("MainScreen").WebList("Dropdown Fungsi").Click
+	wait 1
+	objkey.SendKeys "a"
+
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100"), "Change Some Field Value and Click Button Proses"," ",compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100").Frame("MainScreen").WebButton("Button Proses").Click
+	wait 15
+End Sub
+
 Sub Change_Field_67102
 	set objkey = CreateObject("WScript.Shell")
 	
