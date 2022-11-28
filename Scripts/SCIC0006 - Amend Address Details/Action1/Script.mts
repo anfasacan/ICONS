@@ -16,6 +16,8 @@ Call Search_Detail_CIF_67050()
 
 If Iteration = 1 Then
 	Call Change_Field_67010()
+ElseIf Iteration = 2 Then
+	Call Ammend_Field_67010()
 End If
 
 Call DA_Logout_ICONS()

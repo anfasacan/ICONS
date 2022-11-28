@@ -16,7 +16,20 @@
 		
 		wait 3
 		If Dialog("Bitvise SSH Client 8.46").Exist(10) Then
-			Dialog("Bitvise SSH Client 8.46").WinTab("Closing and minimization").Select "Login"
+		Set objkey = CreateObject("Wscript.Shell")
+'			Dialog("Bitvise SSH Client 8.46").WinTab("Closing and minimization").Select "Login"
+			REM ==== USING OBJKEY
+			Dialog("Bitvise SSH Client 8.46").Click
+			For Iterator = 1 To 4 Step 1
+			objkey.SendKeys "{TAB}"
+			wait 1
+			Next
+			wait 2
+			For Iterator = 1 To 10 Step 1
+			objkey.SendKeys "{LEFT 10}"
+			wait 1			
+			Next
+			
 			wait 2
 			Dialog("Bitvise SSH Client 8.46").WinEdit("Host").Set dtIPAddress
 			Dialog("Bitvise SSH Client 8.46").WinEdit("Port").Set dtPort
