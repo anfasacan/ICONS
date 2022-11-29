@@ -19,7 +19,8 @@
 		Set objkey = CreateObject("Wscript.Shell")
 '			Dialog("Bitvise SSH Client 8.46").WinTab("Closing and minimization").Select "Login"
 			REM ==== USING OBJKEY
-			Dialog("Bitvise SSH Client 8.46").Click
+			Dialog("Bitvise SSH Client 8.46").Static("Default profile").Click
+			wait 1
 			For Iterator = 1 To 4 Step 1
 			objkey.SendKeys "{TAB}"
 			wait 1

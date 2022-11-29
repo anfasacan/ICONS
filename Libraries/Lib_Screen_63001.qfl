@@ -96,31 +96,33 @@ Sub Generate_CIF_63001
 	dtCIF = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("MainScreen").WebEdit("Field CIF").GetROProperty("value")
 	
 	If dtCIF = "" Then
-		Do
-			Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("MainScreen").WebElement("Tab Detail").Click
-			wait 2
-			objkey.SendKeys "{ENTER}"
-			
-			Do 
-			If Dialog("Message from webpage 63001").Exist(12) Then
-				Dialog("Message from webpage 63001").Click
-				objkey.SendKeys "{ENTER}"	
-			End If
-			Loop until not Dialog("Message from webpage 63001").Exist(12)
-			
-			dtCIF = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("MainScreen").WebEdit("Field CIF").GetROProperty("value")
-		Loop Until dtCIF <> ""
+		wait 2
+		dtCIF = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field CIF").GetROProperty("value")
+'		Do
+'			Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("MainScreen").WebElement("Tab Detail").Click
+'			wait 2
+'			objkey.SendKeys "{ENTER}"
+'			
+'			Do 
+'			If Dialog("Message from webpage 63001").Exist(12) Then
+'				Dialog("Message from webpage 63001").Click
+'				objkey.SendKeys "{ENTER}"	
+'			End If
+'			Loop until not Dialog("Message from webpage 63001").Exist(12)
+'			
+'			dtCIF = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("MainScreen").WebEdit("Field CIF").GetROProperty("value")
+'		Loop Until dtCIF <> ""
 	End If
-	
-	information = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("Statusbar").WebElement("statusText").GetROProperty("innertext")
-	informationIcon = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("Statusbar").Image("greenlight").GetROProperty("file name")
-	If informationIcon = "greenlight.jpg" Then
+	wait 5
+'	information = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("Statusbar").WebElement("statusText").GetROProperty("innertext")
+'	informationIcon = Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001").Frame("Statusbar").Image("greenlight").GetROProperty("file name")
+	If dtCIF <> "" Then
 			wait 2
-			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001"), "CIF Success to Generate", "With Status " & information, compatibilityMode.Desktop, ReportStatus.Passed)
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001"), "CIF Success to Generate", " ", compatibilityMode.Desktop, ReportStatus.Passed)
 			wait 2
 		Else 
 			wait 2
-			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001"), "Data Verification Failed", "CIF Failed to Generate", "With Status " & information, compatibilityMode.Desktop, ReportStatus.Failed)	
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 63001"), "CIF Failed to Generate", " ", compatibilityMode.Desktop, ReportStatus.Failed)	
 			wait 2
 		End If
 End Sub

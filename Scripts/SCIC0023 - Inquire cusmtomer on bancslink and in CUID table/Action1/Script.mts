@@ -8,10 +8,10 @@ Call spReportInitiate()
 Call spAddScenario(dt_TCID, dt_ScenarioName, dt_TestCase, dt_ExpectedResult, "")
 
 
-Call DA_Login_ICONS()
-Call GoTo_ScreenNumber()
-Call Search_Detail_CIF_67050()
-Call DA_Logout_ICONS()
+'Call DA_Login_ICONS()
+'Call GoTo_ScreenNumber()
+'Call Search_Detail_CIF_67050()
+'Call DA_Logout_ICONS()
 
 Call DA_Login_Bitvise("FNSONLAD")
 Call Open_Terminal_Bitvise()
