@@ -94,6 +94,32 @@ Sub GET_JLN_Number
 	End If
 End Sub
 
+Sub GET_Fm_Acc_Number
+	REM ==== Call Funtion Library
+	Dim objSysInfo, Path_Env, LibFunction
+	Set objSysInfo 		= Createobject("Wscript.Network")	
+	Path_Env = Environment.Value("Path_Folder")
+	LibFunction = Path_Env & "Libraries\"
+	LibRepo = Path_Env & "Repositories\"
+	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
+	
+	Set objkey = CreateObject("WScript.Shell")
+	Set PasteData = CreateObject("Mercury.Clipboard")
+	Set devices = CreateObject("Mercury.DeviceReplay")
+
+	If Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").Exist(5) Then
+		x = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_x") + 90)
+		y = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_y") + 10)
+		devices.MouseMove x , y
+		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
+		wait 2
+		Fm_Acc_Number = PasteData.GetText
+		wait 2
+	else
+		msgbox "Fm Acc Text Not Found"
+	End If
+End Sub
+
 Sub RUN_SQLPLUS_Bitvice
 	wait 3
 	Window("Bitvise xterm").Type "sqlplus /"

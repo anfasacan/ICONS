@@ -97,6 +97,28 @@ Sub DA_Logout_ICONS
 	End If
 End Sub
 
+Sub DA_Logout_ICONS_No_SS
+	do
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("Toolbar").WebButton("DA_icons_SignOff").Click
+	wait 3
+	Loop until Browser("ICONS 64 Alternity").Dialog("Message from webpage").Exist(2)
+	
+	If Browser("ICONS 64 Alternity").Dialog("Message from webpage").WinButton("DA_icons_OK").Exist(10) Then
+'		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "Logout Icons Confirm 1", " ", compatibilityMode.Desktop, ReportStatus.Passed)
+		Browser("ICONS 64 Alternity").Dialog("Message from webpage").WinButton("DA_icons_OK").Click
+		
+		If Browser("ICONS 64 Alternity").Dialog("Windows Internet Explorer").WinButton("FR_icons_Logout_Yes").Exist(10) Then
+'			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "Logout Icons Confirm 2", " ", compatibilityMode.Desktop, ReportStatus.Passed)
+			Browser("ICONS 64 Alternity").Dialog("Windows Internet Explorer").WinButton("FR_icons_Logout_Yes").Click
+			
+			If Browser("ICONS 64 Alternity").Dialog("Message from webpage").WinButton("DA_icons_OK").Exist(5) Then
+'				Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "Logout Icons Confirm 3", " ", compatibilityMode.Desktop, ReportStatus.Passed)
+				Browser("ICONS 64 Alternity").Dialog("Message from webpage").WinButton("DA_icons_OK").Click
+			End If
+		End If
+	End If
+End Sub
+
 Sub GoTo_ScreenNumber
 	wait 5
 	Dim dtScreenNumber 
@@ -198,3 +220,15 @@ function GetExcelValue(IndexCol,IndexRow,FileName,SheetName)
     Set objWorkbook = Nothing
     Set objExcel = Nothing
 End function
+
+Sub Click_Coordinate(xPercent,yPercent)
+	Set devices = CreateObject("Mercury.DeviceReplay")
+	xTotal = Window("SS_Full_Screen").GetROProperty("width")
+	yTotal = Window("SS_Full_Screen").GetROProperty("height")
+
+	x = round(xPercent/100 * xTotal)
+	y = round(yPercent/100 * yTotal)
+	
+	devices.MouseMove x , y
+	devices.MouseClick x , y , LEFT_MOUSE_BUTTON
+End Sub

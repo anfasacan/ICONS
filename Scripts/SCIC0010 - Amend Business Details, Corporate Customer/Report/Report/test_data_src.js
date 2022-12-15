@@ -1,1 +1,1 @@
-﻿var __testDataSource={items:[{dataFilePath:'Default.xlsx',dataFileFormat:'excel',dataFileFolder:'C:\\Users\\1442\\Desktop\\ICONS\\Scripts\\SCIC0001 - Create CIF\\Report',namePairs:[]}]};
+﻿var __testDataSource={items:[{dataFilePath:'Default.xlsx',dataFileFormat:'excel',dataFileFolder:'C:\\Users\\1442\\Desktop\\ICONS\\Scripts\\SCIC0010 - Amend Business Details, Corporate Customer\\Report',namePairs:[]}]};

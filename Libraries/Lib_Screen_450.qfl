@@ -1,0 +1,22 @@
+﻿Sub Search_Inquiry_Trx_450
+	If Fm_Acc_Number <> "" Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebEdit("Field Nomer Rekening").Set Fm_Acc_Number
+	else
+		msgbox "FM ACC NUMBER EMPTY"
+	End If
+	
+	If JLN_Number <> "" Then
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebEdit("Field No Journal").Set JLN_Number
+	else
+		msgbox "JLN NUMBER EMPTY"
+	End If
+	
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "Fill Field And Click Btn Process", " ", compatibilityMode.Desktop, ReportStatus.Done)
+	wait 2
+	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebButton("Btn Proses").Click
+	wait 10
+	wait 2
+	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "There The Inquiry Transaction", " ", compatibilityMode.Desktop, ReportStatus.Passed)
+	wait 2
+End Sub

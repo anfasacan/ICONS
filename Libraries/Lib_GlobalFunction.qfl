@@ -1,5 +1,6 @@
 ﻿	Dim AccountNumber
 	Dim JLN_Number
+	Dim Fm_Acc_Number
 	Dim dtCIF
 	
 	Dim dtTempTC

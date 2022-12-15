@@ -502,7 +502,6 @@ Sub Ammend_Field_67000
 	wait 1
 	object3 = InStr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000").Frame("MainScreen").WebList("Dropdown Status").GetROProperty("value"),DataTable.Value("KODE_STATUS",dtlocalsheet)) <> 0
 
-	msgbox object1 & object2 & object3
 	If object1 and object2 and object3 Then
 		wait 2
 		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
@@ -530,12 +529,241 @@ Sub Ammend_Field_67010
 	
 	If object1 and object2 and object3 and object4 and object5 and object6 and object7 and object8 Then
 		wait 2
-		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
 		wait 2
 	Else 
 		wait 2
-		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67000"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67010"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
 		wait 2
 	End If
 
+End Sub
+
+Sub Ammend_Field_67100
+Dim object1,object2,object3
+	set objkey = CreateObject("WScript.Shell")
+	
+	object1 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100").Frame("MainScreen").WebEdit("Field Kota Terbit ID").GetROProperty("value")) = ucase(DataTable.value("KOTA_TERBIT_ID",dtlocalsheet))
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100").Frame("MainScreen").WebEdit("Field Tanggal Terbit ID").GetROProperty("value")) = ucase(DataTable.value("TANGGAL_TERBIT_ID",dtlocalsheet))
+	
+		If object1 and object2 Then
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	Else 
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67100"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+		wait 2
+	End If
+	
+	wait 15
+End Sub
+
+Sub Ammend_Field_67101
+	set objkey = CreateObject("WScript.Shell")
+	If DataTable.value("KODE_DETAIL",dtlocalsheet) = 5 Then
+		object1 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Pemberi Kerja").GetROProperty("value")) = ucase(DataTable.Value("PEMBERI_KERJA",dtlocalsheet))
+		object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Keterangan Pekerjaan").GetROProperty("value")) =  ucase(DataTable.Value("KETERANGAN_KERJA",dtlocalsheet))
+		object3 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Alamat Kerja 1").GetROProperty("value")) = ucase(DataTable.Value("ALAMAT_KERJA_1",dtlocalsheet))
+		object4 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Alamat Kerja 2").GetROProperty("value")) = ucase(DataTable.Value("ALAMAT_KERJA_2",dtlocalsheet))
+	ElseIf DataTable.value("KODE_DETAIL",dtlocalsheet) = 8 Then
+		object5 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Nilai Rumah").GetROProperty("value")) = ucase(DataTable.value("NILAI_RUMAH",dtlocalsheet))
+		object6 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101").Frame("MainScreen").WebEdit("Field Simpanan Lain").GetROProperty("value")) = ucase(DataTable.value("SIMPANAN_LAIN",dtlocalsheet))
+	End If
+	
+	
+	If DataTable.value("KODE_DETAIL",dtlocalsheet) = 5 Then
+		If object1 and object2 and object3 and object4 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+	ElseIf DataTable.value("KODE_DETAIL",dtlocalsheet) = 8 Then
+		If object5 and object6 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67101"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+	End If
+	
+End Sub
+
+Sub Ammend_Field_67102
+	set objkey = CreateObject("WScript.Shell")
+	
+	If DataTable.value("KODE_DETAIL",dtlocalsheet) = 6 Then
+		object1 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field No TDP").GetROProperty("value")) = ucase(DataTable.Value("NO_TDP",dtlocalsheet))
+		object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field No SIUP").GetROProperty("value")) = ucase(DataTable.Value("NO_SIUP",dtlocalsheet))
+	ElseIf DataTable.value("KODE_DETAIL",dtlocalsheet) = 8 Then
+		object3 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field Modal Bersih").GetROProperty("value")) = ucase(DataTable.Value("MODAL_BERSIH",dtlocalsheet))
+		object4 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102").Frame("MainScreen").WebEdit("Field Ekuitas Pemengang Saham").GetROProperty("value")) = ucase(DataTable.Value("EKUITAS_PEMEGANG_SAHAM",dtlocalsheet))
+	End If
+	
+	If DataTable.value("KODE_DETAIL",dtlocalsheet) = 6 Then
+		If object1 and object2 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+	ElseIf DataTable.value("KODE_DETAIL",dtlocalsheet) = 8 Then
+		If object3 and object4 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67102"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+	End If
+	
+	wait 15
+End Sub
+
+Sub Ammend_Field_67103
+	set objkey = CreateObject("WScript.Shell")
+	object1 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103").Frame("MainScreen").WebList("Dropdown Referensi").GetROProperty("value"),DataTable.Value("KODE_INDIKATOR_PEMASARAN",dtlocalsheet)) <> 0
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103").Frame("MainScreen").WebEdit("Field Tanggal Jatuh Tempo").GetROProperty("value")) = ucase(DataTable.Value("TANGGAL_JATUH_TEMPO",dtlocalsheet))
+	If object1 and object2 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67103"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+End Sub
+
+Sub Ammend_Field_67108
+	set objkey = CreateObject("WScript.Shell")
+	object1 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108").Frame("MainScreen").WebEdit("Field Nama Ibu Kandung").GetROProperty("value")) = ucase(DataTable.Value("NAMA_IBU_KANDUNG",dtlocalsheet))
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108").Frame("MainScreen").WebEdit("Field Email").GetROProperty("value")) = ucase(DataTable.Value("EMAIL",dtlocalsheet))
+	If object1 and object2 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67108"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+End Sub
+
+Sub Ammend_Field_67109
+	set objkey = CreateObject("WScript.Shell")
+
+	object1 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebList("Dropdown Jenis ID").GetROProperty("value"),DataTable.Value("KODE_JENIS_ID",dtlocalsheet))
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field No ID").GetROProperty("value")) = ucase(DataTable.Value("NO_ID",dtlocalsheet))
+	object3 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field Tempat Penerbit ID").GetROProperty("value")) = ucase(DataTable.Value("TEMPAT_TERBIT_ID",dtlocalsheet))
+	object4 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field Tanggal").GetROProperty("value")) = ucase(DataTable.Value("TANGGAL",dtlocalsheet))
+	object5 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109").Frame("MainScreen").WebEdit("Field Tanggal Expired").GetROProperty("value")) = ucase(DataTable.Value("TANGGAL_EXPIRED",dtlocalsheet))
+	
+	If object1 and object2 and object3 and object4 and object5 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67109"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+End Sub
+
+Sub Ammend_Field_67060
+	set objkey = CreateObject("WScript.Shell")
+	object1 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebList("Dropdown Other Bank Worst Collectibility").GetROProperty("value"),DataTable.Value("KODE_OTHER_BANK_WORST_COLLECTIBILITY",dtlocalsheet)) <> 0	
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060").Frame("MainScreen").WebEdit("Field Other Bank").GetROProperty("value")) = ucase(DataTable.Value("OTHER_BANK_NAME",dtlocalsheet))
+	If object1 and object2 Then
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+			wait 2
+		Else 
+			wait 2
+			Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67060"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+			wait 2
+		End If
+End Sub
+
+Sub Ammend_Field_67111
+	set objkey = CreateObject("WScript.Shell")
+	object1 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Nama Pemilik").GetROProperty("value")) = ucase(DataTable.Value("NAMA_PEMILIK",dtlocalsheet))
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Alamat").GetROProperty("value")) = ucase(DataTable.Value("ALAMAT",dtlocalsheet))
+	object3 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field TIN").GetROProperty("value")) = ucase(DataTable.Value("TIN",dtlocalsheet))
+	object4 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111").Frame("MainScreen").WebEdit("Field Saham").GetROProperty("value")) = ucase(DataTable.Value("PERSENAN_SAHAM",dtlocalsheet))
+	
+	If object1 and object2 and object3 and object4 Then
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	Else 
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67111"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+		wait 2
+	End If
+End Sub
+
+Sub Ammend_Field_67112
+	set objkey = CreateObject("WScript.Shell")
+	object1 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field Nama Lengkap").GetROProperty("value")) = ucase(DataTable.Value("NAMA_LENGKAP",dtlocalsheet))
+	object2 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field Jabatan").GetROProperty("value")) = ucase(DataTable.Value("JABATAN",dtlocalsheet))
+	object3 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field No ID").GetROProperty("value")) = ucase(DataTable.Value("NOMER_ID",dtlocalsheet))
+	object4 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112").Frame("MainScreen").WebEdit("Field Pilih").GetROProperty("value")) = ucase(DataTable.Value("KODE_PILIH",dtlocalsheet))
+
+
+	If object1 and object2 and object3 and object4 Then
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	Else 
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67112"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+		wait 2
+	End If
+	
+End Sub
+
+Sub Ammend_Field_67113
+	set objkey = CreateObject("WScript.Shell")
+	
+	object1 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Hubungan Usaha").GetROProperty("value"),DataTable.Value("KODE_TUJUAN",dtlocalsheet)) <> 0
+	object2 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Jenis ID").GetROProperty("value"),DataTable.Value("KODE_JENIS_ID",dtlocalsheet)) <> 0
+	object3 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Jenis Kelamin").GetROProperty("value"),DataTable.Value("KODE_JENIS_KELAMIN",dtlocalsheet)) <> 0
+	object4 = left(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Penghasilan Pertahun").GetROProperty("value"),1) = DataTable.Value("KODE_PENGHASILAN_PERTAHUN",dtlocalsheet)
+	object5 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Status Kawin").GetROProperty("value"),DataTable.Value("KODE_STATUS_KAWIN",dtlocalsheet)) <> 0
+	object6 = instr(1,Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebList("Dropdown Sumber Dana").GetROProperty("value"),DataTable.Value("KODE_SUMBER_DANA",dtlocalsheet)) <> 0
+	object7 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nama Lengkap").GetROProperty("value")) = ucase(DataTable.Value("NAMA_LENGKAP",dtlocalsheet))
+	object8 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Alamat Bekerja").GetROProperty("value")) = ucase(DataTable.Value("ALAMAT_TEMPAT_BEKERJA",dtlocalsheet))
+	object9 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Alamat Sesuai ID").GetROProperty("value")) = ucase(DataTable.Value("ALAMAT_SESUAI_ID",dtlocalsheet))
+	object10 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Alamat Tempat Tinggal").GetROProperty("value")) = ucase(DataTable.Value("ALAMAT_TEMPAT_TINGGAL",dtlocalsheet))
+	object11 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Kode No Telp Kantor").GetROProperty("value")) = ucase(left(DataTable.Value("NO_TELP_TEMPAT_KERJA",dtlocalsheet),3))
+	object12 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field No Telp Kantor").GetROProperty("value")) = ucase(mid(DataTable.Value("NO_TELP_TEMPAT_KERJA",dtlocalsheet),4,len(DataTable.Value("NO_TELP_TEMPAT_KERJA",dtlocalsheet)) - 3))
+	object13 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nomer ID").GetROProperty("value")) = ucase(DataTable.Value("NO_ID",dtlocalsheet))
+	object14 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Nomer Pajak").GetROProperty("value")) = ucase(DataTable.Value("NO_PAJAK",dtlocalsheet))
+	object15 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Pekerjaan").GetROProperty("value")) = ucase(DataTable.Value("PEKERJAAN",dtlocalsheet))
+	object16 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Tanggal Lahir").GetROProperty("value")) = ucase(DataTable.Value("TANGGAL_LAHIR",dtlocalsheet))
+	object17 = ucase(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113").Frame("MainScreen").WebEdit("Field Tempat Lahir").GetROProperty("value")) = ucase(DataTable.Value("TEMPAT_LAHIR",dtlocalsheet))
+
+	If object1 and object2 and object3 and object4 and object5 and object6 and object7 and object8 and object9 and object10 and object11 and object12 and object13 and object14 and object15 and object16 and object17 Then
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113"), "All Data Is Already Change"," ",compatibilityMode.Desktop, ReportStatus.Passed)
+		wait 2
+	Else 
+		wait 2
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity 67113"), "Some Data Is Not Change"," ",compatibilityMode.Desktop, ReportStatus.Failed)
+		wait 2
+	End If
+	
 End Sub
