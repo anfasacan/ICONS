@@ -55,18 +55,23 @@ Sub Close_Terminal_Bitvise()
 End Sub
 
 Sub Open_Terminal_Bitvise()	
-	If Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Exist(3) Then
-		Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Click
-	ElseIf Dialog("fnstpca@192.168.132.31:22").InsightObject("TERMINAL_IMG").Exist(3) Then
-		Dialog("fnstpca@192.168.132.31:22").InsightObject("TERMINAL_IMG").Exist(3)
-	else
-		Dialog("Administrator@192.168.150.133:22").WinObject("Custom1").Click 30,218
-	End If
+'	If Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Exist(3) Then
+'		Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Click
+'	ElseIf Dialog("fnstpca@192.168.132.31:22").InsightObject("TERMINAL_IMG").Exist(3) Then
+'		Dialog("fnstpca@192.168.132.31:22").InsightObject("TERMINAL_IMG").Exist(3)
+'	else
+'		Dialog("Administrator@192.168.150.133:22").WinObject("Custom1").Click 30,218
+'	End If
+'
+'	do 
+'	Loop until Window("Bitvise xterm").Exist(2) 
 
-	do 
-	Loop until Window("Bitvise xterm").Exist(2) 
+	Call Click_Coordinate(30.8,42.6)
+	wait 10
+	If Window("Bitvise xterm").Exist Then
+		Window("Bitvise xterm").Maximize
+	End If
 	
-	Window("Bitvise xterm").Maximize
 	wait 3
 End Sub
 
