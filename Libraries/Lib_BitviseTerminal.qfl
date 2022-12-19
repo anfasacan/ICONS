@@ -40,10 +40,15 @@ Sub RUN_Command_Bitvise(Command)
 	
 	wait 15
 	
-	If Window("Bitvise xterm_2").InsightObject("FAIL !").Exist(3) and ucase(command) = "SIMATM" Then
-		Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand),"The Output of SIMATM FAIL!", compatibilityMode.Desktop, ReportStatus.Failed)	
-	else
-		Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand)," ", compatibilityMode.Desktop, ReportStatus.Passed)	
+	If ucase(command) = "SIMATM" Then
+		sTemp_result = Window("Bitvise xterm").GetVisibleText
+		Fail_Check = instr(1,ucase(sTemp_result),"FAIL")
+		If Fail_Check <> 0 Then
+			Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand)," ", compatibilityMode.Desktop, ReportStatus.Passed)	
+		Else 
+			Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand),"The Output of SIMATM FAIL!", compatibilityMode.Desktop, ReportStatus.Failed)	
+		End If
+		
 	End If
 	
 	
@@ -66,7 +71,7 @@ Sub Open_Terminal_Bitvise()
 '	do 
 '	Loop until Window("Bitvise xterm").Exist(2) 
 
-	Call Click_Coordinate(30.8,42.6)
+	Call Open_TerminalV2
 	wait 10
 	If Window("Bitvise xterm").Exist Then
 		Window("Bitvise xterm").Maximize
@@ -76,53 +81,88 @@ Sub Open_Terminal_Bitvise()
 End Sub
 
 Sub GET_JLN_Number
-	REM ==== Call Funtion Library
-	Dim objSysInfo, Path_Env, LibFunction
-	Set objSysInfo 		= Createobject("Wscript.Network")	
-	Path_Env = Environment.Value("Path_Folder")
-	LibFunction = Path_Env & "Libraries\"
-	LibRepo = Path_Env & "Repositories\"
-	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
+	sTemp_result = Window("Bitvise xterm").GetVisibleText
+	JNL_Number_start = instr(1,ucase(sTemp_result),"JNL")
 	
-	Set objkey = CreateObject("WScript.Shell")
-	Set PasteData = CreateObject("Mercury.Clipboard")
-	Set devices = CreateObject("Mercury.DeviceReplay")
-	
-	If Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").Exist(5) Then
-		x = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_x") + 90)
-		y = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_y") + 10)
-		devices.MouseMove x , y
-		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
-		wait 2
-		JLN_Number = PasteData.GetText
-		wait 2
+	If JNL_Number_start = 0 Then
+		JNL_Number_start = instr(1,ucase(sTemp_result),"INI")
 	End If
+	
+	If JNL_Number_start = 0 Then
+		msgbox "JNL Number Is Empty"
+	End If
+	
+	JNL_Number_Select_Text = mid(sTemp_result,JNL_Number_start,20)
+	JNL_Number_Select_Text = Split(JNL_Number_Select_Text,"|")
+	
+	JNL_Number_Remove_Text_Alphabet = Replace(ucase(JNL_Number_Select_Text(0)),"JNL","")
+	JNL_Number_Remove_Text_Alphabet = Replace(ucase(JNL_Number_Remove_Text_Alphabet),"INI","")
+	JNL_Number_Remove_Text_Alphabet = Replace(JNL_Number_Remove_Text_Alphabet,":","")
+	JNL_Number_Remove_Text_Alphabet = Replace(JNL_Number_Remove_Text_Alphabet," ","")
+	JNL_Number_Remove_Text_Alphabet = Replace(JNL_Number_Remove_Text_Alphabet,"	","")
+	
+	JLN_Number = JNL_Number_Remove_Text_Alphabet
+	msgbox JLN_Number
+	
+'	msgbox sTemp_result
+'	msgbox jln_start
+'	REM ==== Call Funtion Library
+'	Dim objSysInfo, Path_Env, LibFunction
+'	Set objSysInfo 		= Createobject("Wscript.Network")	
+'	Path_Env = Environment.Value("Path_Folder")
+'	LibFunction = Path_Env & "Libraries\"
+'	LibRepo = Path_Env & "Repositories\"
+'	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
+'	
+'	Set objkey = CreateObject("WScript.Shell")
+'	Set PasteData = CreateObject("Mercury.Clipboard")
+'	Set devices = CreateObject("Mercury.DeviceReplay")
+'	
+'	If Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").Exist(5) Then
+'		x = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_x") + 90)
+'		y = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_y") + 10)
+'		devices.MouseMove x , y
+'		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
+'		wait 2
+'		JLN_Number = PasteData.GetText
+'		wait 2
+'	End If
 End Sub
 
 Sub GET_Fm_Acc_Number
-	REM ==== Call Funtion Library
-	Dim objSysInfo, Path_Env, LibFunction
-	Set objSysInfo 		= Createobject("Wscript.Network")	
-	Path_Env = Environment.Value("Path_Folder")
-	LibFunction = Path_Env & "Libraries\"
-	LibRepo = Path_Env & "Repositories\"
-	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
+	sTemp_result = Window("Bitvise xterm").GetVisibleText
+	Fm_Acc_start = instr(1,ucase(sTemp_result),"FM ACC")
+	Fm_Acc_Select_Text = mid(sTemp_result,Fm_Acc_start,20)
+	Fm_Acc_Select_Text = Split(Fm_Acc_Select_Text,"|")
+	Fm_Acc_Remove_Text_Alphabet = Replace(Fm_Acc_Select_Text(0),"Fm Acc","")
+	Fm_Acc_Remove_Text_Alphabet = Replace(Fm_Acc_Remove_Text_Alphabet,":","")
+	Fm_Acc_Remove_Text_Alphabet = Replace(Fm_Acc_Remove_Text_Alphabet," ","")
+	Fm_Acc_Remove_Text_Alphabet = Replace(Fm_Acc_Remove_Text_Alphabet,"	","")
 	
-	Set objkey = CreateObject("WScript.Shell")
-	Set PasteData = CreateObject("Mercury.Clipboard")
-	Set devices = CreateObject("Mercury.DeviceReplay")
-
-	If Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").Exist(5) Then
-		x = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_x") + 90)
-		y = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_y") + 10)
-		devices.MouseMove x , y
-		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
-		wait 2
-		Fm_Acc_Number = PasteData.GetText
-		wait 2
-	else
-		msgbox "Fm Acc Text Not Found"
-	End If
+	Fm_Acc_Number = Fm_Acc_Remove_Text_Alphabet
+'	REM ==== Call Funtion Library
+'	Dim objSysInfo, Path_Env, LibFunction
+'	Set objSysInfo 		= Createobject("Wscript.Network")	
+'	Path_Env = Environment.Value("Path_Folder")
+'	LibFunction = Path_Env & "Libraries\"
+'	LibRepo = Path_Env & "Repositories\"
+'	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
+'	
+'	Set objkey = CreateObject("WScript.Shell")
+'	Set PasteData = CreateObject("Mercury.Clipboard")
+'	Set devices = CreateObject("Mercury.DeviceReplay")
+'
+'	If Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").Exist(5) Then
+'		x = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_x") + 90)
+'		y = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_y") + 10)
+'		devices.MouseMove x , y
+'		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
+'		wait 2
+'		Fm_Acc_Number = PasteData.GetText
+'		wait 2
+'	else
+'		msgbox "Fm Acc Text Not Found"
+'	End If
 End Sub
 
 Sub RUN_SQLPLUS_Bitvice
@@ -131,3 +171,15 @@ Sub RUN_SQLPLUS_Bitvice
 	wait 2
 	Window("Bitvise xterm").Type micReturn
 end sub
+
+Sub Open_TerminalV2
+	Set devices = CreateObject("Mercury.DeviceReplay")
+	xNewTotal = Dialog("Administrator@192.168.150.133:22").GetROProperty("width")
+	yNewTotal = Dialog("Administrator@192.168.150.133:22").GetROProperty("height")
+	
+	x = round(52 * xNewTotal / 646) 
+	y = round(211 * yNewTotal / 600)
+	
+	Dialog("Administrator@192.168.150.133:22").Click x,y
+'	devices.MouseMove x , y
+End Sub

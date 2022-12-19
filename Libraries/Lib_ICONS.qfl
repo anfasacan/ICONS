@@ -230,5 +230,19 @@ Sub Click_Coordinate(xPercent,yPercent)
 	y = round(yPercent/100 * yTotal)
 	
 	devices.MouseMove x , y
-	devices.MouseClick x , y , LEFT_MOUSE_BUTTON
+'	devices.MouseClick x , y , LEFT_MOUSE_BUTTON
 End Sub
+
+Sub Click_CoordinateV2(Coor_x,Coor_y,Screen_x,Screen_y)
+	Set devices = CreateObject("Mercury.DeviceReplay")
+	xNewTotal = Window("SS_Full_Screen").GetROProperty("width")
+	yNewTotal = Window("SS_Full_Screen").GetROProperty("height")
+
+	x = round(Coor_x * xNewTotal / Screen_x)
+	y = round(Coor_y * yNewTotal / Screen_y)
+	
+	devices.MouseMove x , y
+'	devices.MouseClick x , y , LEFT_MOUSE_BUTTON
+End Sub
+
+
