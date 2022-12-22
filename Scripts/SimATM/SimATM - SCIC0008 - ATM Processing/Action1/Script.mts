@@ -47,6 +47,7 @@ Sub spLoadLibrary()
 	Call RepositoriesCollection.Add(LibRepo & "RP_Notepad.tsr")
 	Call RepositoriesCollection.Add(LibRepo & "RP_Bitvice.tsr")
 	Call RepositoriesCollection.Add(LibRepo & "RP_Screen_450.tsr")
+	Call RepositoriesCollection.Add(LibRepo & "RP_Bitvice_Terminal.tsr")
 End Sub
 
 Sub spGetDatatable()
