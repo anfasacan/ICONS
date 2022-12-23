@@ -161,30 +161,7 @@ Sub GET_JLN_Number
 		objShell.Popup "JLN Number : " & JLN_Number , 5
 	End If
 	
-''	msgbox strSearchString
-''	msgbox sTemp_result
-''	msgbox jln_start
-'	REM ==== Call Funtion Library
-'	Dim objSysInfo, Path_Env, LibFunction
-'	Set objSysInfo 		= Createobject("Wscript.Network")	
-'	Path_Env = Environment.Value("Path_Folder")
-'	LibFunction = Path_Env & "Libraries\"
-'	LibRepo = Path_Env & "Repositories\"
-'	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
-'	
-'	Set objkey = CreateObject("WScript.Shell")
-'	Set PasteData = CreateObject("Mercury.Clipboard")
-'	Set devices = CreateObject("Mercury.DeviceReplay")
-'	
-'	If Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").Exist(5) Then
-'		x = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_x") + 90)
-'		y = (Window("Bitvise xterm").InsightObject("IMG_TEXT_JLN").getRoProperty("abs_y") + 10)
-'		devices.MouseMove x , y
-'		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
-'		wait 2
-'		JLN_Number = PasteData.GetText
-'		wait 2
-'	End If
+
 End Sub
 
 Sub GET_Fm_Acc_Number
@@ -265,33 +242,6 @@ Sub GET_Fm_Acc_Number
 		
 		objShell.Popup "Fm Acc Number : "&Fm_Acc_Number , 5
 	End If
-	
-	
-	
-	
-'	REM ==== Call Funtion Library
-'	Dim objSysInfo, Path_Env, LibFunction
-'	Set objSysInfo 		= Createobject("Wscript.Network")	
-'	Path_Env = Environment.Value("Path_Folder")
-'	LibFunction = Path_Env & "Libraries\"
-'	LibRepo = Path_Env & "Repositories\"
-'	LoadFunctionLibrary (LibFunction & "Lib_Notepad.qfl")
-'	
-'	Set objkey = CreateObject("WScript.Shell")
-'	Set PasteData = CreateObject("Mercury.Clipboard")
-'	Set devices = CreateObject("Mercury.DeviceReplay")
-'
-'	If Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").Exist(5) Then
-'		x = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_x") + 90)
-'		y = (Window("Bitvise xterm").InsightObject("IMG_Fm_Acc_TEXT").getRoProperty("abs_y") + 10)
-'		devices.MouseMove x , y
-'		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
-'		wait 2
-'		Fm_Acc_Number = PasteData.GetText
-'		wait 2
-'	else
-'		msgbox "Fm Acc Text Not Found"
-'	End If
 End Sub
 
 Sub RUN_SQLPLUS_Bitvice
@@ -303,12 +253,43 @@ end sub
 
 Sub Open_TerminalV2
 	Set devices = CreateObject("Mercury.DeviceReplay")
-	xNewTotal = Dialog("Administrator@192.168.150.133:22").GetROProperty("width")
-	yNewTotal = Dialog("Administrator@192.168.150.133:22").GetROProperty("height")
+	Set objkey = CreateObject("WScript.Shell")
 	
-	x = round(52 * xNewTotal / 646) 
-	y = round(211 * yNewTotal / 600)
+	If not Window("Bitvise xterm").Exist(2) Then
+		If Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_2").Exist(2) Then
+			Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_2").Click
+		ElseIf Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Exist(2) Then
+			Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Click
+		ElseIf Dialog("Administrator@192.168.150.133:22").TextObject("New terminal_IMG_TEXT").Exist(2) Then
+			Dialog("Administrator@192.168.150.133:22").TextObject("New terminal_IMG_TEXT").Click
+		ElseIf Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_3").Exist(2) Then
+			Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_3").Click
+		Else 
+			Dialog("Administrator@192.168.150.133:22").Static("Default profile").Click
+			wait 2
+			objkey.SendKeys "{TAB}"
+			wait 1
+			objkey.SendKeys "{TAB}"
+			wait 1
+			objkey.SendKeys "{TAB}"
+			wait 1
+			objkey.SendKeys "{DOWN}"
+			wait 1
+			objkey.SendKeys "{DOWN}"
+			wait 1
+			objkey.SendKeys "{SPACE}"
+			wait 1
+		End If
+	End If
 	
-	Dialog("Administrator@192.168.150.133:22").Click x,y
-'	devices.MouseMove x , y
+	If not Window("Bitvise xterm").Exist(2) Then
+		xNewTotal = Dialog("Administrator@192.168.150.133:22").GetROProperty("width")
+		yNewTotal = Dialog("Administrator@192.168.150.133:22").GetROProperty("height")
+		
+		x = round(52 * xNewTotal / 646) 
+		y = round(211 * yNewTotal / 600)
+		
+		Dialog("Administrator@192.168.150.133:22").Click x,y
+		wait 3
+	End If
 End Sub

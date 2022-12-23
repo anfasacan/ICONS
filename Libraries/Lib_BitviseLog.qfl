@@ -48,12 +48,18 @@
 End Sub
 
 Sub DA_Logout_Bitvise()
+	Set objkey = CreateObject("WScript.Shell")
 	If Dialog("Session Active").Exist(5) Then
 	Dialog("Session Active").WinButton("Yes").Click
 	End If
 	Dialog("Administrator@192.168.150.133:22").WinButton("Log out").Click
-	wait 2
+	wait 5
 	Dialog("Bitvise SSH Client 8.46").Close
+	If Dialog("Bitvise SSH Client 8.46").Exist(2) Then
+		Dialog("Bitvise SSH Client 8.46").Static("Default profile").Click
+		objkey.SendKeys "%{F4}"
+	End If
+	
 End Sub
 
 
