@@ -41,12 +41,14 @@ Sub RUN_Command_Bitvise(Command)
 	wait 15
 	
 	If ucase(command) = "SIMATM" Then
-		sTemp_result = Window("Bitvise xterm").GetVisibleText
-		Fail_Check = instr(1,ucase(sTemp_result),"FAIL")
-		If Fail_Check <> 0 Then
-			Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand)," ", compatibilityMode.Desktop, ReportStatus.Passed)	
+		
+
+		If Window("Bitvise xterm").InsightObject("Fail_IMG_SimATM_FAIL!").Exist(2) or Window("Bitvise xterm").InsightObject("Fail_IMG_SimATM_FAIL").Exist(2) Then
+			wait  2
+			Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand),"The Output of SIMATM FAIL!", compatibilityMode.Desktop, ReportStatus.Failed)
 		Else 
-			Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand),"The Output of SIMATM FAIL!", compatibilityMode.Desktop, ReportStatus.Failed)	
+			wait 2
+			Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand)," ", compatibilityMode.Desktop, ReportStatus.Passed)	
 		End If
 	else
 		Call CaptureImageUFTV2(Window("Bitvise xterm"), "There is The output from command " & UCase(dtCommand)," ", compatibilityMode.Desktop, ReportStatus.Passed)	
@@ -55,6 +57,7 @@ Sub RUN_Command_Bitvise(Command)
 	
 	wait 2
 end sub
+
 
 Sub Close_Terminal_Bitvise()
 	Window("Bitvise xterm").Close
@@ -262,6 +265,93 @@ Sub GET_Fm_Acc_Number
 	End If
 End Sub
 
+Sub GET_To_Acc_Number
+
+	Set PasteData = CreateObject("Mercury.Clipboard")
+	Set devices = CreateObject("Mercury.DeviceReplay")
+	Set objShell = CreateObject("WScript.Shell")
+	
+	xTotal = Window("Bitvise xterm").GetROProperty("width")
+	yTotal = Window("Bitvise xterm").GetROProperty("height")
+	
+	If xTotal < 768 Then
+		xPlus = 70
+	ElseIf xTotal > 768 And xTotal < (768 * 1.5) Then
+		xPlus = 90
+	ElseIf xTotal > (768 * 1.5) And xTotal < (768 * 2) Then
+		xPlus = 110
+	ElseIf xTotal > (768 * 2) And xTotal < (768 * 2.5) Then
+		xPlus = 130
+	ElseIf xTotal > (768 * 2.5) And xTotal < (768 * 3) Then
+		xPlus = 150
+	ElseIf xTotal > (768 * 3) And xTotal < (768 * 4) Then
+		xPlus = 170
+	else
+		msgbox "Screen Resolution Way to Big "
+	End If
+
+
+	If Window("Bitvise xterm").InsightObject("To Acc_IMG_To Acc:").Exist(2) Then
+		x = (Window("Bitvise xterm").InsightObject("To Acc_IMG_To Acc:").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").InsightObject("To Acc_IMG_To Acc:").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	ElseIf Window("Bitvise xterm").InsightObject("To Acc_IMG_To Acc").Exist(2) Then
+		x = (Window("Bitvise xterm").InsightObject("To Acc_IMG_To Acc").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").InsightObject("To Acc_IMG_To Acc").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	ElseIf Window("Bitvise xterm").TextObject("To Acc_IMG_TEXT_To Acc:").Exist(2) Then
+		x = (Window("Bitvise xterm").TextObject("To Acc_IMG_TEXT_To Acc:").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").TextObject("To Acc_IMG_TEXT_To Acc:").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	else
+	Rem v2 ==============================================================================================
+	sTemp_result = Window("Bitvise xterm").GetVisibleText
+	To_Acc_start = instr(1,ucase(sTemp_result),"FM ACC")
+	To_Acc_Select_Text = mid(sTemp_result,To_Acc_start,20)
+	To_Acc_Select_Text = Split(To_Acc_Select_Text,"|")
+	To_Acc_Select_Text_2 = Split(To_Acc_Select_Text(0),"ID")
+	msgbox To_Acc_Select_Text_2(0)
+	
+	To_Acc_Check_Empty = mid(To_Acc_Select_Text_2(0),9,1)
+'	To_Acc_Check_Empty_2 = mid(To_Acc_Select_Text_2(0),1,1)
+	msgbox To_Acc_Check_Empty
+	
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Select_Text_2(0),"Fm Acc","")
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Remove_Text_Alphabet,":","")
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Remove_Text_Alphabet," ","")
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Remove_Text_Alphabet,"	","")
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Remove_Text_Alphabet, vbCrLf ,"")
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Remove_Text_Alphabet, chr(10) ,"")
+	To_Acc_Remove_Text_Alphabet = Replace(To_Acc_Remove_Text_Alphabet, chr(13) ,"")
+	
+	Set objRegEx = CreateObject("VBScript.RegExp")
+	objRegEx.Global = True   
+	objRegEx.Pattern = "[^0-9]"
+	strSearchString = To_Acc_Remove_Text_Alphabet
+	strSearchString = objRegEx.Replace(strSearchString, "")
+	
+	To_Acc_Number = strSearchString
+	If To_Acc_Check_Empty = "" or To_Acc_Check_Empty = " " or To_Acc_Check_Empty = "	" or To_Acc_Check_Empty = vbCrLf or To_Acc_Check_Empty = Chr(10) or To_Acc_Check_Empty = Chr(13) Then
+		To_Acc_Number = ""
+	End If
+	objShell.Popup "To Acc Number : "&To_Acc_Number , 5
+	Rem v2 ==============================================================================================
+	End If
+	
+	If Work_FlagV1 Then
+		devices.MouseMove x , y
+		devices.MouseDblClick x , y , LEFT_MOUSE_BUTTON
+		wait 2
+		To_Acc_Number = PasteData.GetText
+		wait 2
+		PasteData.SetText ""
+		
+		objShell.Popup "To Acc Number : "&To_Acc_Number , 5
+	End If
+End Sub
+
+
+
 Sub RUN_SQLPLUS_Bitvice
 	wait 3
 	Window("Bitvise xterm").Type "sqlplus /"
@@ -310,4 +400,46 @@ Sub Open_TerminalV2
 		Dialog("Administrator@192.168.150.133:22").Click x,y
 		wait 3
 	End If
+End Sub
+
+
+Sub Get_Fm_Acc_Or_To_Acc
+	Set objShell = CreateObject("WScript.Shell")
+	
+	Call GET_Fm_Acc_Number
+	Call GET_To_Acc_Number
+	
+	If len(Fm_Acc_Number) >= 17 and Fm_Acc_Number <> "00000000000000000" Then
+		Fm_Acc_Number_Or_To_Acc_Number = Fm_Acc_Number
+		
+	ElseIf 1 < len(Fm_Acc_Number) and len(Fm_Acc_Number) < 17 and Fm_Acc_Number <> "0000000000" Then
+		If To_Acc_Number <> "" and To_Acc_Number <> " " and To_Acc_Number <> "0" Then
+			Fm_Acc_Number_Or_To_Acc_Number = To_Acc_Number
+		else
+			Fm_Acc_Number_Or_To_Acc_Number = Fm_Acc_Number
+		End If
+		
+	ElseIf Fm_Acc_Number = "00000000000000000" or Fm_Acc_Number = "0000000000" Then
+		If To_Acc_Number <> "" and To_Acc_Number <> " " and To_Acc_Number <> "0" Then
+			Fm_Acc_Number_Or_To_Acc_Number = To_Acc_Number
+		else
+			Call ReRunSimATM()
+		End If
+		
+	ElseIf len(Fm_Acc_Number) < 2 Then
+		If To_Acc_Number <> "" or To_Acc_Number <> "0" Then
+			Fm_Acc_Number_Or_To_Acc_Number = To_Acc_Number
+		else
+			Call ReRunSimATM()
+		End If
+	else
+		msgbox "Error No Acc or To Acc Number"
+	End If
+	objShell.Popup "To Acc Number/Fm Acc Number : "&Fm_Acc_Number_Or_To_Acc_Number , 5
+End Sub
+
+Sub ReRunSimATM
+	Call RUN_Command_Bitvise("SIMATM")
+	Call RUN_Command_Bitvise("SHOWJNL")
+	Call Get_Fm_Acc_Or_To_Acc()
 End Sub

@@ -1,7 +1,7 @@
 ﻿Dim dt_TCID, dt_ScenarioName, dt_TestCase, dt_ExpectedResult
 
 Call spLoadLibrary()
-Call spInitiateData("Excel_Report.xlsx", "SimATM - SCIC0007 - ATM Processing.xlsx", "ICON0007-001")
+Call spInitiateData("Excel_Report.xlsx", "Simatm4_1_1_3_BC.xlsx", "Simatm4_1_1_1_BC")
 Call spGetDatatable()
 Call fnRunningIterator()
 Call spReportInitiate()

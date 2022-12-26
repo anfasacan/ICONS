@@ -1,6 +1,6 @@
 ﻿Sub Search_Inquiry_Trx_450
 	If Fm_Acc_Number <> "" Then
-		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebEdit("Field Nomer Rekening").Set Fm_Acc_Number
+		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebEdit("Field Nomer Rekening").Set Fm_Acc_Number_Or_To_Acc_Number
 	else
 		msgbox "FM ACC NUMBER EMPTY"
 	End If
