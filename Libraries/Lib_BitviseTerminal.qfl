@@ -105,8 +105,11 @@ Sub GET_JLN_Number
 	else
 		msgbox "Screen Resolution Way to Big "
 	End If
-	
-	If Window("Bitvise xterm").TextObject("JNL_IMG_TEXT_3nl").Exist(2) Then
+	If Window("Bitvise xterm").InsightObject("JLN_IMG_JLN").Exist(2) Then
+		x = (Window("Bitvise xterm").InsightObject("JLN_IMG_JLN").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").InsightObject("JLN_IMG_JLN").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	elseIf Window("Bitvise xterm").TextObject("JNL_IMG_TEXT_3nl").Exist(2) Then
 		x = (Window("Bitvise xterm").TextObject("JNL_IMG_TEXT_3nl").getRoProperty("abs_x") + xPlus)
 		y = (Window("Bitvise xterm").TextObject("JNL_IMG_TEXT_3nl").getRoProperty("abs_y") + 10)
 		Work_FlagV1 = True
@@ -114,6 +117,9 @@ Sub GET_JLN_Number
 		x = (Window("Bitvise xterm").TextObject("JNL_IMG_TEXT_Ini").getRoProperty("abs_x") + xPlus)
 		y = (Window("Bitvise xterm").TextObject("JNL_IMG_TEXT_Ini").getRoProperty("abs_y") + 10)
 		Work_FlagV1 = True
+	ElseIf Window("Bitvise xterm").TextObject("JLN_IMG_TEXt_JLN :").Exist(2) Then
+		x = (Window("Bitvise xterm").TextObject("JLN_IMG_TEXt_JLN :").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").TextObject("JLN_IMG_TEXt_JLN :").getRoProperty("abs_y") + 10)
 	else
 		REM V2
 		sTemp_result = Window("Bitvise xterm").GetVisibleText
@@ -189,7 +195,19 @@ Sub GET_Fm_Acc_Number
 		msgbox "Screen Resolution Way to Big "
 	End If
 	
-	If Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEXT_Fm Arc").Exist(2) Then
+	If Window("Bitvise xterm").InsightObject("Fm Acc_IMG_Fm Acc").Exist(2) Then
+		x = (Window("Bitvise xterm").InsightObject("Fm Acc_IMG_Fm Acc").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").InsightObject("Fm Acc_IMG_Fm Acc").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	ElseIf Window("Bitvise xterm").InsightObject("Fm Acc_IMG_Fm Acc:").Exist(2) Then
+		x = (Window("Bitvise xterm").InsightObject("Fm Acc_IMG_Fm Acc:").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").InsightObject("Fm Acc_IMG_Fm Acc:").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	ElseIf Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEX_Fm Acc:").Exist(2) Then
+		x = (Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEXT_Fm Acc:").getRoProperty("abs_x") + xPlus)
+		y = (Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEXT_Fm Acc:").getRoProperty("abs_y") + 10)
+		Work_FlagV1 = True
+	elseIf Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEXT_Fm Arc").Exist(2) Then
 		x = (Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEXT_Fm Arc").getRoProperty("abs_x") + xPlus)
 		y = (Window("Bitvise xterm").TextObject("Fm Acc_IMG_TEXT_Fm Arc").getRoProperty("abs_y") + 10)
 		Work_FlagV1 = True
@@ -260,8 +278,8 @@ Sub Open_TerminalV2
 			Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_2").Click
 		ElseIf Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Exist(2) Then
 			Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG").Click
-		ElseIf Dialog("Administrator@192.168.150.133:22").TextObject("New terminal_IMG_TEXT").Exist(2) Then
-			Dialog("Administrator@192.168.150.133:22").TextObject("New terminal_IMG_TEXT").Click
+'		ElseIf Dialog("Administrator@192.168.150.133:22").TextObject("New terminal_IMG_TEXT").Exist(2) Then
+'			Dialog("Administrator@192.168.150.133:22").TextObject("New terminal_IMG_TEXT").Click
 		ElseIf Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_3").Exist(2) Then
 			Dialog("Administrator@192.168.150.133:22").InsightObject("TERMINAL_IMG_3").Click
 		Else 

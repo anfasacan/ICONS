@@ -59,6 +59,7 @@ Sub DA_Logout_Bitvise()
 		Dialog("Bitvise SSH Client 8.46").Static("Default profile").Click
 		objkey.SendKeys "%{F4}"
 	End If
+	wait 5
 	
 End Sub
 
