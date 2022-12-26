@@ -12,18 +12,18 @@ Call Open_Terminal_Bitvise()
 Call RUN_Command_Bitvise("SIMATM")
 Call RUN_Command_Bitvise("SHOWJNL")
 Call GET_JLN_Number()
-Call GET_Fm_Acc_Number()
+Call Get_Fm_Acc_Or_To_Acc()
 Call Close_Terminal_Bitvise()
 Call DA_Logout_Bitvise()
-'Call DA_Login_Bitvise("FNSONLAD")
-'Call Open_Terminal_Bitvise()
-'Call RUN_Command_Bitvise("GETGLIF")
-'Call Close_Terminal_Bitvise()
-'Call DA_Logout_Bitvise()
-'Call DA_Login_ICONS()
-'Call GoTo_ScreenNumber()
-'Call Search_Inquiry_Trx_450()
-'Call DA_Logout_ICONS_No_SS()
+Call DA_Login_Bitvise("FNSONLAD")
+Call Open_Terminal_Bitvise()
+Call RUN_Command_Bitvise("GETGLIF")
+Call Close_Terminal_Bitvise()
+Call DA_Logout_Bitvise()
+Call DA_Login_ICONS()
+Call GoTo_ScreenNumber()
+Call Search_Inquiry_Trx_450()
+Call DA_Logout_ICONS_No_SS()
 
 Call spReportSave()
 
@@ -48,7 +48,6 @@ Sub spLoadLibrary()
 	Call RepositoriesCollection.Add(LibRepo & "RP_Bitvice.tsr")
 	Call RepositoriesCollection.Add(LibRepo & "RP_Screen_450.tsr")
 	Call RepositoriesCollection.Add(LibRepo & "RP_Bitvice_Terminal.tsr")
-	
 End Sub
 
 Sub spGetDatatable()
@@ -59,4 +58,3 @@ Sub spGetDatatable()
 	dt_ExpectedResult		= DataTable.Value("EXPECTED_RESULT", dtLocalSheet)
 	
 End Sub
-

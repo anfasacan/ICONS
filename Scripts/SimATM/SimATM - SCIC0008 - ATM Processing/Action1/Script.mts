@@ -12,7 +12,7 @@ Call Open_Terminal_Bitvise()
 Call RUN_Command_Bitvise("SIMATM")
 Call RUN_Command_Bitvise("SHOWJNL")
 Call GET_JLN_Number()
-Call GET_Fm_Acc_Number()
+Call Get_Fm_Acc_Or_To_Acc()
 Call Close_Terminal_Bitvise()
 Call DA_Logout_Bitvise()
 Call DA_Login_Bitvise("FNSONLAD")
@@ -58,4 +58,3 @@ Sub spGetDatatable()
 	dt_ExpectedResult		= DataTable.Value("EXPECTED_RESULT", dtLocalSheet)
 	
 End Sub
-
