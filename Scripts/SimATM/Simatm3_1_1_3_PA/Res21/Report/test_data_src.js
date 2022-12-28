@@ -1,0 +1,1 @@
+﻿var __testDataSource={items:[{dataFilePath:'Default.xlsx',dataFileFormat:'excel',dataFileFolder:'D:\\BNI All\\ICONS DEMO SIMATM\\ICONS-main\\Scripts\\SimATM\\Simatm3_1_1_3_PA\\Res21',namePairs:[]}]};

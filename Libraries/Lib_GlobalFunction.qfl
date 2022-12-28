@@ -3,6 +3,7 @@
 	Dim Fm_Acc_Number
 	Dim To_Acc_Number
 	Dim Fm_Acc_Number_Or_To_Acc_Number
+	Dim Promo_Code_Text
 	Dim dtCIF
 	
 	Dim dtTempTC

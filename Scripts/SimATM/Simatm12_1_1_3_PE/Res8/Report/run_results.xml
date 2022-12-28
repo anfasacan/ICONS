@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<Results version="1.0">
+<ReportNode type="testrun">
+<ReportNode type="Iteration">
+<ReportNode type="Action">
+<ReportNode type="Iteration">
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>LoadFunctionLibrary</Name>
+    <Description>LoadFunctionLibrary function passed</Description>
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Result>Passed</Result>
+    <Extension>
+      <IconKey>7ca06f7eb1ac4fc5b7623975cf8e15b0</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>The retrieve DataTable.Value operation failed. The &lt;TC_ID&gt; column does not exist.</Name>
+    <ErrorText>The retrieve DataTable.Value operation failed. The &lt;TC_ID&gt; column does not exist.</ErrorText>
+    <Description>The retrieve DataTable.Value operation failed. The &amp;lt;TC_ID&amp;gt; column does not exist.&lt;BR/&gt;Line (55): &amp;quot;dt_TCID					= DataTable.Value(&amp;quot;TC_ID&amp;quot;, dtLocalSheet)&amp;quot;. </Description>
+    <StartTime>2022-12-27 09:22:49</StartTime>
+    <Result>Failed</Result>
+    <Extension>
+      <StackTrace>
+        <StackFrame>
+          <ModuleName><![CDATA[Simatm14_1_1_1_BH]]></ModuleName>
+          <FileName><![CDATA[Simatm14_1_1_1_BH]]></FileName>
+          <Language><![CDATA[Simatm14_1_1_1_BH]]></Language>
+          <FunctionName><![CDATA[spGetDatatable]]></FunctionName>
+          <Scripts><![CDATA[dt_TCID					= DataTable.Value("TC_ID", dtLocalSheet)]]></Scripts>
+          <LineNo><![CDATA[55]]></LineNo>
+        </StackFrame>
+        <StackFrame>
+          <ModuleName><![CDATA[Simatm14_1_1_1_BH]]></ModuleName>
+          <FileName><![CDATA[Simatm14_1_1_1_BH]]></FileName>
+          <Language><![CDATA[Call spGetDatatable()]]></Language>
+          <FunctionName><![CDATA[VBScript global code]]></FunctionName>
+          <Scripts><![CDATA[Call spGetDatatable()]]></Scripts>
+          <LineNo><![CDATA[5]]></LineNo>
+        </StackFrame>
+      </StackTrace>
+      <IconKey>5fb9a45c3b89407ab27b26a3ffb40de1</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+      <MergeIsErrorIcon>True</MergeIsErrorIcon>
+    </Extension>
+    <Snapshot reference="Resources\Snapshots\89bb107e-1605-42e2-b4a6-e36c736f19eb.jpeg" />
+  </Data>
+</ReportNode>
+<ReportNode type="Step">
+<Data>
+    <Name>Stop Run</Name>
+    <Description>Run stopped by user.</Description>
+    <StartTime>2022-12-27 09:22:53</StartTime>
+    <Result>Information</Result>
+    <Extension>
+      <IconKey>9ac1ad492c9948119b5fde1fd2e7f8f7</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>Simatm14_1_1_1_BH</Name>
+    <Description />
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Duration>5</Duration>
+    <Result>Failed</Result>
+    <Extension>
+      <IconKey>b5509b5bda514d08b3c055569cff0d8f</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Index>1</Index>
+    <TestedApplications />
+  </Data>
+</ReportNode>
+<Data>
+    <Name>Simatm14_1_1_1_BH</Name>
+    <Description />
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Duration>5</Duration>
+    <Result>Failed</Result>
+    <InputParameters />
+    <Extension>
+      <IconKey>7dd3e7728ab84d5582b6eac58bd71491</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+  </Data>
+</ReportNode>
+<Data>
+    <Name>Action0</Name>
+    <Description />
+    <StartTime>2022-12-27 09:22:48</StartTime>
+    <Duration>5</Duration>
+    <Result>Failed</Result>
+    <Extension>
+      <IconKey>b5509b5bda514d08b3c055569cff0d8f</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Index>1</Index>
+    <TestedApplications />
+  </Data>
+</ReportNode>
+<Data>
+    <Name>Simatm14_1_1_1_BH</Name>
+    <ToolName>Micro Focus Unified Functional Testing</ToolName>
+    <ToolVersion>0</ToolVersion>
+    <ToolVersionStringLiteral>15.0.1</ToolVersionStringLiteral>
+    <Description />
+    <StartTime>2022-12-27 09:22:46</StartTime>
+    <Duration>7</Duration>
+    <Result>Failed</Result>
+    <InputParameters />
+    <Extension>
+      <IconKey>9d20da8108034eb899e1082dfde51aca</IconKey>
+      <IsPlainTextNodeName>True</IsPlainTextNodeName>
+    </Extension>
+    <Environment>
+      <Timezone>+07:00:00</Timezone>
+      <Locale>English (Indonesia)</Locale>
+      <User>asus</User>
+      <CpuInfo>11th Gen Intel(R) Core(TM) i5-11300H @ 3.10GHz</CpuInfo>
+      <NumberOfCores>8</NumberOfCores>
+      <TotalMemory>7871</TotalMemory>
+      <HostName>LAPTOP-JDUEI4CK</HostName>
+      <OSInfo>Windows 10</OSInfo>
+    </Environment>
+    <TestedApplications />
+    <Links>
+      <Link type="DataTable" reference="Default.xlsx" displayname="Default Data Table" />
+    </Links>
+  </Data>
+</ReportNode>
+<GeneralInfo>
+    <ResultName>Res8</ResultName>
+    <RunStartTime>2022-12-27 09:22:46</RunStartTime>
+    <Timezone>+07:00:00</Timezone>
+    <OrchestrationToolName>Micro Focus Unified Functional Testing</OrchestrationToolName>
+    <OrchestrationToolVersion>0</OrchestrationToolVersion>
+    <OrchestrationToolVersionStringLiteral>15.0.1</OrchestrationToolVersionStringLiteral>
+  </GeneralInfo>
+</Results>

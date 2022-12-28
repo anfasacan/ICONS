@@ -1,5 +1,5 @@
 ﻿Sub Search_Inquiry_Trx_450
-	If Fm_Acc_Number <> "" Then
+	If Fm_Acc_Number_Or_To_Acc_Number <> "" Then
 		Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebEdit("Field Nomer Rekening").Set Fm_Acc_Number_Or_To_Acc_Number
 	else
 		msgbox "FM ACC NUMBER EMPTY"
@@ -17,6 +17,11 @@
 	Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity").Frame("MainScreen").WebButton("Btn Proses").Click
 	wait 10
 	wait 2
-	Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "There The Inquiry Transaction", " ", compatibilityMode.Desktop, ReportStatus.Passed)
+	If Promo_Code_Text <> "" Then
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "There The Inquiry Transaction", "Promo Code : " & Promo_Code_Text, compatibilityMode.Desktop, ReportStatus.Passed)
+	else
+		Call CaptureImageUFTV2(Browser("ICONS 64 Alternity").Page("ICONS 64 Alternity"), "There The Inquiry Transaction", " ", compatibilityMode.Desktop, ReportStatus.Passed)	
+	End If
+	
 	wait 2
 End Sub
